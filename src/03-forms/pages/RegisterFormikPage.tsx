@@ -1,73 +1,53 @@
-import { FormEvent } from 'react'
-import '../styles/styles.css'
-import { useForm } from '../hooks/useForm'
+import { Form, Formik } from 'formik'
+import * as Yup from "yup";
 
+import { MyTextInput } from '../components';
+import '../styles/styles.css'
 
 export const RegisterFormikPage = () => {
 
-    const { name, email, onChange, password1, password2, formData: registerData, resetForm } = useForm({
-        email: '',
-        name: '',
-        password1: '',
-        password2: '',
-    })
-
-
-    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        console.log(registerData)
-
-    }
     return (
+        <Formik
+            initialValues={{
+                email: '',
+                name: '',
+                password1: '',
+                password2: '',
+            }}
+            validationSchema={Yup.object({
+                name: Yup.string()
+                    .required('Requerido')
+                    .min(2, 'Debe de tener un minimo de 2 caracteres.')
+                    .max(15, 'Debe de tener un máximo de 2 caracteres.'),
+                email: Yup.string()
+                    .email('Debe de ser un email valido.')
+                    .required('Requerido'),
+                password1: Yup.string()
+                    .required('Requerido')
+                    .min(6, 'Debe de tener un minimo de 6 caracteres.'),
+                password2: Yup.string()
+                    .oneOf([Yup.ref('password1')], 'Las contraseñas no son iguales.')
+                    .required('Requerido')
+                    .min(6, 'Debe de tener un minimo de 6 caracteres.')
+            })}
+            onSubmit={(values) => {
+                console.log(values);
+            }}>
+            {
 
-        <div>
-            <h1>RegisterFormikPage</h1>
+                ({ handleReset }) => (
 
-            <form
-                noValidate
-                onSubmit={onSubmit}
+                    <Form>
+                        <MyTextInput label='Name' name='name' placeholder='Santiago' />
+                        <MyTextInput label='Email' name='email' type='email' placeholder='algo@gmail.com' />
+                        <MyTextInput label='Password' name='password1' type='password' placeholder='******' />
+                        <MyTextInput label='Confirm password' name='password2' type='password' placeholder='******' />
 
-            >
-
-                <input
-                    type="text"
-                    placeholder="Name"
-
-                    name='name'
-                    value={name}
-                    onChange={onChange}
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    name='email'
-                    value={email}
-                    onChange={onChange}
-
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    name='password1'
-                    value={password1}
-                    onChange={onChange}
-
-
-                />
-                <input
-                    type="password"
-                    placeholder="Repeat password"
-                    name='password2'
-                    value={password2}
-                    onChange={onChange}
-
-                />
-
-                <button type="submit">Create</button>
-                <button type="button" onClick={resetForm}>Reset Form</button>
-            </form>
-
-        </div>
-
+                        <button type='submit' > Register </button>
+                        <button type='submit' onClick={handleReset}> Reset form </button>
+                    </Form>
+                )
+            }
+        </Formik>
     )
 }
