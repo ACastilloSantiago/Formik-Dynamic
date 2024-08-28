@@ -1,0 +1,24 @@
+[
+    {
+        "type":"input",
+        "name":"firstName",
+        "placeholder":"Santiago",
+        "label":"First Name",
+        "value":""
+    },
+    {
+        "type":"input",
+        "name":"lastName",
+        "placeholder":"Castillo",
+        "label":"Last Name",
+        "value":""
+    },
+    {
+        "type":"email",
+        "name":"email",
+        "placeholder":"algo@gmail.com",
+        "label":"Email",
+        "value":""
+    }
+    
+]
