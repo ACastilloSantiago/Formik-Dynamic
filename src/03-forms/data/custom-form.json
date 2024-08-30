@@ -1,24 +1,70 @@
 [
-    {
-        "type":"input",
-        "name":"firstName",
-        "placeholder":"Santiago",
-        "label":"First Name",
-        "value":""
-    },
-    {
-        "type":"input",
-        "name":"lastName",
-        "placeholder":"Castillo",
-        "label":"Last Name",
-        "value":""
-    },
-    {
-        "type":"email",
-        "name":"email",
-        "placeholder":"algo@gmail.com",
-        "label":"Email",
-        "value":""
-    }
-    
+  {
+    "type": "input",
+    "name": "firstName",
+    "placeholder": "Santiago",
+    "label": "First Name",
+    "value": "",
+    "validations": [
+      {
+        "type": "required"
+      },
+      {
+        "type": "minLength",
+        "value": 5
+      }
+    ]
+  },
+  {
+    "type": "input",
+    "name": "lastName",
+    "placeholder": "Castillo",
+    "label": "Last Name",
+    "value": "",
+    "validations": [
+      {
+        "type": "required"
+      }
+    ]
+  },
+  {
+    "type": "email",
+    "name": "email",
+    "placeholder": "algo@gmail.com",
+    "label": "Email",
+    "value": "",
+    "validations": [
+      {
+        "type": "required"
+      },
+      {
+        "type": "email"
+      }
+    ]
+  },
+  {
+    "type": "select",
+    "name": "favoriteGame",
+    "label": "Favorite Game",
+    "value": "",
+    "validations": [
+      {
+        "type": "required"
+      }
+    ],
+    "options": [
+      {
+        "label": "Super Smash",
+        "id": 1
+      },
+      {
+        "label": "Metal Gear",
+        "id": 2
+      },
+      {
+        "label": "Resident Evil",
+        "id": 3
+      }
+    ]
+  }
 ]
